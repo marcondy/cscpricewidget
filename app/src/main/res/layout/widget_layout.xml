@@ -5,14 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/layout_roundcor" />
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/widget"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/layout_roundcor"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/transparent">
 
         <ImageView
             android:id="@+id/icon"
@@ -28,10 +34,12 @@
             android:layout_marginEnd="@dimen/half_default_value"
             android:background="@color/transparent"
             android:gravity="center"
-            android:text="@string/nodata"
+            android:text="-.-"
             android:textColor="@color/mainColor"
-            android:textSize="30dp" />
+            android:textSize="30dp"/>
     </LinearLayout>
+
+
 
     <ProgressBar
         android:id="@+id/progressBar"

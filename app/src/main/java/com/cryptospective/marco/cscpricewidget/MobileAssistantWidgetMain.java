@@ -18,6 +18,7 @@ public class MobileAssistantWidgetMain extends AppWidgetProvider {
     public static final String WIDGET_TEXT_COLOR = "widget_text_color";
     public static final String WIDGET_BACKGROUND_COLOR = "widget_background_color";
     public static final String COLOR_DEFAULT_TEXT = "#bf0a0a";
+    public static final String BACKGROUND_ALPHA = "alpha";
     public static final String COLOR_DEFAULT_BACKGROUND = "#c4000000";
 
     public static final String WIDGET_ICON = "widget_icon";
@@ -49,7 +50,11 @@ public class MobileAssistantWidgetMain extends AppWidgetProvider {
         Intent refresh = new Intent(context, UpdateWidgetServiceMain.class);
         refresh.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
         refresh.setData(Uri.parse(refresh.toUri(Intent.URI_INTENT_SCHEME)));
-        context.startService(refresh);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(refresh);
+        } else {
+            context.startService(refresh);
+        }
     }
 
     @Override

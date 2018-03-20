@@ -44,7 +44,7 @@ public class Request {
 
                 try {
                     requestListener.onSuccess(response.body().string());
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

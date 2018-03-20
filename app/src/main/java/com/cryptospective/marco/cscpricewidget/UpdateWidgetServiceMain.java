@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.cryptospective.marco.cscpricewidget.MobileAssistantWidgetMain.BACKGROUND_ALPHA;
 import static com.cryptospective.marco.cscpricewidget.MobileAssistantWidgetMain.COLOR_DEFAULT_BACKGROUND;
 import static com.cryptospective.marco.cscpricewidget.MobileAssistantWidgetMain.COLOR_DEFAULT_TEXT;
 import static com.cryptospective.marco.cscpricewidget.MobileAssistantWidgetMain.REFRESH_WIDGET;
@@ -103,9 +105,11 @@ public class UpdateWidgetServiceMain extends Service {
             remoteView.setInt(R.id.icon, "setVisibility", View.GONE);
         }
 
-        Log.w("log", "changeWidget: " + mFontSelectedColor );
         remoteView.setTextColor(R.id.price, Color.parseColor(mFontSelectedColor));
-        remoteView.setInt(R.id.widget, "setBackgroundColor", Color.parseColor(mPanelSelectedColor));
+
+        remoteView.setInt(R.id.background, "setColorFilter", Color.parseColor(mPanelSelectedColor));
+        remoteView.setInt(R.id.background, "setAlpha", mSharedPreferences.getInt(BACKGROUND_ALPHA, 255));
+
         AppWidgetManager.getInstance(this).partiallyUpdateAppWidget(widgetId, remoteView);
 
         Intent refreshWidget = new Intent(this.getApplicationContext(), MobileAssistantWidgetMain.class);
@@ -118,6 +122,8 @@ public class UpdateWidgetServiceMain extends Service {
 
 
     }
+
+
 
     public void showProgressBar(boolean isShow, int widgetId) {
         RemoteViews remoteView = new RemoteViews(this.getApplicationContext().getPackageName(), R.layout.widget_layout);
@@ -155,7 +161,7 @@ public class UpdateWidgetServiceMain extends Service {
                             JSONObject jsonObject = jsonArray.optJSONObject(0);
 
                             changeWidget(jsonObject.optString("price_usd"), jsonObject.optString("price_btc"), widgetId);
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

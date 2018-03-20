@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -169,9 +170,10 @@ public class WidgetEditActivity extends AppCompatActivity implements Caladbolg.C
                 mSharedPreferences.edit().putString(WIDGET_ICON, "" + rand.nextInt(3)).apply();
 
 
+
                 mSharedPreferences.edit().putString(WIDGET_TEXT_COLOR, generateColor(rand)).apply();
                 mSharedPreferences.edit().putString(WIDGET_BACKGROUND_COLOR, generateColor(rand)).apply();
-
+                mSharedPreferences.edit().putInt(BACKGROUND_ALPHA, 100 + rand.nextInt(155)).apply();
 
                 Intent resultValue = new Intent();
                 resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mWidgetId);
@@ -217,7 +219,9 @@ public class WidgetEditActivity extends AppCompatActivity implements Caladbolg.C
         } else {
             mPanelSelectedColor = ColorHelper.checkColor(ColorUtils.colorCode(ColorUtils.argb(rgb, alpha)));
             panelColor.setTextColor(Color.parseColor(mPanelSelectedColor));
+            Log.w("log", "onPickColor: " + mPanelSelectedColor );
             mSharedPreferences.edit().putString(WIDGET_BACKGROUND_COLOR, mPanelSelectedColor).apply();
+            mSharedPreferences.edit().putInt(BACKGROUND_ALPHA, alpha).apply();
         }
     }
 
@@ -248,8 +252,7 @@ public class WidgetEditActivity extends AppCompatActivity implements Caladbolg.C
 
         s[0] = '#';
         for (int i=1;i<7;i++) {
-            s[i] = hex[n & 0xf];
-            n >>= 4;
+            s[i] = hex[r.nextInt(16 )];
         }
         return new String(s);
     }

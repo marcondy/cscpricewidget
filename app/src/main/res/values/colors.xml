@@ -13,4 +13,7 @@
     <color name="widgetBackground">#c4000000</color>
     <color name="cscred">#bf0a0a</color>
     <color name="selectred">#bf0a0a</color>
+
+    <color name="colorWhite">#ffffff</color>
+
 </resources>

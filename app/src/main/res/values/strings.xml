@@ -5,6 +5,4 @@
     <string name="btc">BTC</string>
     <string name="usd">USD</string>
     <string name="btc_fa">&#xf15a;</string>
-    <string name="nodata">No Data</string>
-
 </resources>
