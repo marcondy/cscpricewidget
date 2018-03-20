@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Work\\trunk\\caladbolg\\build\\intermediates\\res\\merged\\debug\\layout-land\\dialog_caladbolg.xml",
+        "source": "C:\\Work\\trunk\\caladbolg\\src\\main\\res\\layout-land\\dialog_caladbolg.xml"
+    },
+    {
+        "merged": "F:\\trunk\\caladbolg\\build\\intermediates\\res\\merged\\debug\\layout-land\\dialog_caladbolg.xml",
+        "source": "F:\\trunk\\caladbolg\\src\\main\\res\\layout-land\\dialog_caladbolg.xml"
+    },
+    {
+        "merged": "D:\\Projects\\eMagicOne\\trunk\\caladbolg\\build\\intermediates\\res\\merged\\debug\\layout-land\\dialog_caladbolg.xml",
+        "source": "D:\\Projects\\eMagicOne\\trunk\\caladbolg\\src\\main\\res\\layout-land\\dialog_caladbolg.xml"
+    }
+]

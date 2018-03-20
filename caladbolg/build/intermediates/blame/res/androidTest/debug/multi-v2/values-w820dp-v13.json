@@ -1,0 +1,64 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\Projects\\Work\\CryptocurrencyCSC\\caladbolg\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+            "map": [
+                {
+                    "source": "D:\\Projects\\Work\\CryptocurrencyCSC\\caladbolg\\build\\intermediates\\bundles\\debug\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,127,186,238",
+                        "endColumns": "71,58,51,56",
+                        "endOffsets": "122,181,233,290"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\marce\\Documents\\cscpricewidget\\caladbolg\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\marce\\Documents\\cscpricewidget\\caladbolg\\build\\intermediates\\bundles\\debug\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,127,186,238",
+                        "endColumns": "71,58,51,56",
+                        "endOffsets": "122,181,233,290"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\marce\\Documents\\cscpricewidget - Copy\\caladbolg\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\marce\\Documents\\cscpricewidget - Copy\\caladbolg\\build\\intermediates\\bundles\\debug\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,127,186,238",
+                        "endColumns": "71,58,51,56",
+                        "endOffsets": "122,181,233,290"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "D:\\DownloadNew\\CryptocurrencyCSC\\caladbolg\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+            "map": [
+                {
+                    "source": "D:\\DownloadNew\\CryptocurrencyCSC\\caladbolg\\build\\intermediates\\bundles\\debug\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,127,186,238",
+                        "endColumns": "71,58,51,56",
+                        "endOffsets": "122,181,233,290"
+                    }
+                }
+            ]
+        }
+    ]
+}

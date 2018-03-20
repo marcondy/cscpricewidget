@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="callback_implement_msg_caladbolg">must implement ColorPickerCallback. if you use Caladbolg from Fragment, please use getInstance(Fragment, int).</string>
+    <string name="callback_implement_msg_caliburn">must implement OnChangeColorListener. if you use Caliburn from Fragment, please use getInstance(Fragment).</string>
+
+    <string name="color_fmt">#%1$x</string>
+    <string name="color_param_fmt">R:%1$03d G:%2$03d B:%3$03d A:%4$03d</string>
+</resources>

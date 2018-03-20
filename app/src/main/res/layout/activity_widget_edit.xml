@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="6dp"
+                android:scaleType="center"
+                android:src="@drawable/casinocoin_logo" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/mainColor" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/welcome_to_unofficial_csc_widget"
+                android:textColor="@color/mainColor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_value"
+                android:layout_marginStart="@dimen/default_value"
+                android:layout_marginTop="@dimen/default_value"
+                android:text="@string/select_currency"
+                android:textColor="@color/mainColor"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_value"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/BTC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/selectred"
+                    android:padding="@dimen/half_default_value"
+                    android:text="@string/btc"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/USD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:padding="@dimen/half_default_value"
+                    android:text="@string/usd"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_value"
+                android:layout_marginStart="@dimen/default_value"
+                android:layout_marginTop="@dimen/default_value"
+                android:text="Select Icon:"
+                android:textColor="@color/mainColor"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_value"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/iconOne"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@color/mainBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon" />
+
+                <ImageButton
+                    android:id="@+id/iconTwo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/half_default_value"
+                    android:background="@color/cscred"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_white" />
+
+                <TextView
+                    android:id="@+id/noIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:padding="@dimen/half_default_value"
+                    android:text="NO ICON"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_value"
+                android:layout_marginStart="@dimen/default_value"
+                android:layout_marginTop="@dimen/default_value"
+                android:text="Select Font Color:"
+                android:textColor="@color/mainColor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/fontColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/half_default_value"
+                android:text="Font Color"
+                android:textColor="@color/mainColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_value"
+                android:layout_marginStart="@dimen/default_value"
+                android:layout_marginTop="@dimen/default_value"
+                android:text="Select Background Color:"
+                android:textColor="@color/mainColor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/panelColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/half_default_value"
+                android:text="Background Color"
+                android:textColor="@color/widgetBackground"
+                android:textSize="20sp" />
+
+
+
+            <ImageView
+                android:id="@+id/spade"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/heart_icon" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_value"
+                android:layout_marginStart="@dimen/default_value"
+                android:layout_marginTop="@dimen/default_value"
+                android:gravity="center"
+                android:text="Buy Me a Beer"
+                android:textColor="@color/mainColor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/xxx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="cKxv2YDfVRgcX9eVQBRtfVwwEEKgofvKjH"
+                android:textColor="@color/mainColor"
+                android:textSize="18sp"
+                android:layout_margin="@dimen/half_default_value"/>
+
+            <TextView
+                android:id="@+id/save"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="SAVE"
+                android:background="@color/cscred"
+                android:textColor="@color/mainBackground"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/default_value"/>
+        </LinearLayout>
+    </ScrollView>
