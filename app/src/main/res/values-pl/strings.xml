@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CSC Cena Widżet</string>
+    <string name="welcome_to_unofficial_csc_widget">Witam w nieoficjalnym CSC Widżecie</string>
+    <string name="select_currency">Wybierz Walute:</string>
+    <string name="btc">BTC</string>
+    <string name="usd">USD</string>
+    <string name="btc_fa">&#xf15a;</string>
+    <string name="noicon">BEZ IKONY</string>
+    <string name="selectfc">Wybierz Kolor Tekstu:</string>
+    <string name="selectico">Wybierz Ikone</string>
+    <string name="fontcolor">Tekst</string>
+    <string name="backgroundcolor">Tło</string>
+    <string name="selectbackground">Wybierz Kolor Tła</string>
+    <string name="buymebeer">Postaw Mi Piwko</string>
+    <string name="toast_copied">Zapisany! <b>*** Dzięki!! *** </b> </string>
+    <string name="save">ZAPISZ</string>
+</resources>

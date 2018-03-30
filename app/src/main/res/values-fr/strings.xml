@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Widget prix CSC</string>
+    <string name="welcome_to_unofficial_csc_widget">Bienvenue sur Widget CSC non officiel</string>
+    <string name="select_currency">Sélectionnez la devise:</string>
+    <string name="btc">BTC</string>
+    <string name="usd">USD</string>
+    <string name="btc_fa">&#xf15a;</string>
+    <string name="noicon">PAS D'ICÔNE</string>
+    <string name="selectfc">Sélectionnez Couleur des Caractères</string>
+    <string name="selectico">Sélectionnez l'icône:</string>
+    <string name="fontcolor">Caractères</string>
+    <string name="backgroundcolor">Fond</string>
+    <string name="selectbackground">Sélectionnez la couleur de fond</string>
+    <string name="buymebeer">Achetez-moi une bière!</string>
+    <string name="toast_copied">Copié! <b>*** Merci beaucoup *** </b> </string>
+    <string name="save">ENREGISTRER</string>
+</resources>

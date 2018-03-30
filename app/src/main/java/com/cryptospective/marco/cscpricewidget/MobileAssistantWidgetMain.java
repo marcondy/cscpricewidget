@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 
@@ -47,9 +48,16 @@ public class MobileAssistantWidgetMain extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
+        int[] widgetSizes = new int[appWidgetIds.length];
+
         Intent refresh = new Intent(context, UpdateWidgetServiceMain.class);
         refresh.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
         refresh.setData(Uri.parse(refresh.toUri(Intent.URI_INTENT_SCHEME)));
+
+        for(int i = 0; i < appWidgetIds.length; i++){
+            widgetSizes[i] = appWidgetManager.getAppWidgetOptions(appWidgetIds[i]).getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH);
+        }
+        refresh.putExtra("SIZE_WIDGETS", widgetSizes);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(refresh);
         } else {
@@ -64,21 +72,15 @@ public class MobileAssistantWidgetMain extends AppWidgetProvider {
 
     @Override
     public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
-
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            int maxWidth = newOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH);
+        int maxWidth = newOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        float newSize = (maxWidth - 84) / 6;
+        remoteViews.setTextViewTextSize(R.id.price, TypedValue.COMPLEX_UNIT_SP, newSize);
 
-            int pxSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, maxWidth, context.getResources().getDisplayMetrics());
+        appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
 
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-            float newSize = pxSize / 8f;
-
-            remoteViews.setTextViewTextSize(R.id.price, TypedValue.COMPLEX_UNIT_PX, newSize);
-
-            appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
-        }
 
     }
 }

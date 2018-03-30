@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">سعر CSC</string>
+    <string name="welcome_to_unofficial_csc_widget">مرحبًا بكم في أداة CSC غير الرسمية</string>
+    <string name="select_currency">اختر العملة:</string>
+    <string name="btc">BTC</string>
+    <string name="usd">USD</string>
+    <string name="btc_fa">&#xf15a;</string>
+    <string name="noicon">بدون رمز</string>
+    <string name="selectfc">اختر لون الخط:</string>
+    <string name="selectico">اختر الرمز</string>
+    <string name="fontcolor">الخط</string>
+    <string name="backgroundcolor">خلفية</string>
+    <string name="selectbackground">حدد لون الخلفية</string>
+    <string name="buymebeer">قدر عملي</string>
+    <string name="toast_copied">نسخ <b>*** شكرا جزيلا *** </b> </string>
+    <string name="save">حفظ</string>
+
+</resources>

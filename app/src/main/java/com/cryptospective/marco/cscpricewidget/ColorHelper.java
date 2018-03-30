@@ -10,4 +10,6 @@ public class ColorHelper {
         }
         return "#" + result + color;
     }
+
+
 }

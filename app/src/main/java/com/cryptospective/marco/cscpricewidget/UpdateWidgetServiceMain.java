@@ -1,13 +1,15 @@
 package com.cryptospective.marco.cscpricewidget;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
@@ -15,13 +17,12 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
-
-import android.util.Log;
+import android.support.v4.app.NotificationCompat;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.RemoteViews;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.cryptospective.marco.cscpricewidget.MobileAssistantWidgetMain.BACKGROUND_ALPHA;
@@ -37,15 +38,37 @@ import static com.cryptospective.marco.cscpricewidget.MobileAssistantWidgetMain.
 
 public class UpdateWidgetServiceMain extends Service {
     public int[] widgetIds;
+    int[] widgetSizes;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        if (Build.VERSION.SDK_INT >= 26) {
+            String CHANNEL_ID = "my_channel_01";
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
+
+            Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setContentTitle("")
+                    .setContentText("").build();
+
+            startForeground(1, notification);
+        }
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
+        int size = 0;
         if (intent != null) {
             try {
                 widgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_ID);
+                widgetSizes = intent.getIntArrayExtra("SIZE_WIDGETS");
             } catch (Exception e) {
                 widgetIds = new int[]{intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0)};
+                widgetSizes = new int[]{intent.getIntExtra("SIZE_WIDGETS", 0)};
             }
         }
 
@@ -53,11 +76,10 @@ public class UpdateWidgetServiceMain extends Service {
 
             ComponentName thisWidget = new ComponentName(this, MobileAssistantWidgetMain.class);
             widgetIds = AppWidgetManager.getInstance(this).getAppWidgetIds(thisWidget);
+
         }
-        for (int widgetId : widgetIds) {
-
-
-            ChangeWidgetThread changeWidgetThread = new ChangeWidgetThread(widgetId);
+        for (int i = 0; i < widgetIds.length; i++) {
+            ChangeWidgetThread changeWidgetThread = new ChangeWidgetThread(widgetIds[i], widgetSizes[i]);
             changeWidgetThread.start();
         }
         return START_STICKY;
@@ -77,7 +99,7 @@ public class UpdateWidgetServiceMain extends Service {
         super.onTaskRemoved(rootIntent);
     }
 
-    public void changeWidget(String priceUSD, String priceBTC, final int widgetId) {
+    public void changeWidget(String priceUSD, String priceBTC, final int widgetId, int size) {
 
         showProgressBar(false, widgetId);
 
@@ -86,7 +108,7 @@ public class UpdateWidgetServiceMain extends Service {
         String mFontSelectedColor = mSharedPreferences.getString(WIDGET_TEXT_COLOR, COLOR_DEFAULT_TEXT);
         String mPanelSelectedColor = mSharedPreferences.getString(WIDGET_BACKGROUND_COLOR, COLOR_DEFAULT_BACKGROUND);
         String mCurrency = mSharedPreferences.getString(WIDGET_CURRENCY, "0");
-        String mIcon = mSharedPreferences.getString(WIDGET_ICON, "0");
+        String mIcon = mSharedPreferences.getString(WIDGET_ICON, "1");
 
         final RemoteViews remoteView = new RemoteViews(this.getApplicationContext().getPackageName(), R.layout.widget_layout);
 
@@ -97,18 +119,25 @@ public class UpdateWidgetServiceMain extends Service {
         }
 
 
-        if(mIcon.equals("0")){
+        if (mIcon.equals("0")) {
             remoteView.setInt(R.id.icon, "setImageResource", R.drawable.icon);
-        }else if(mIcon.equals("1")){
+        } else if (mIcon.equals("1")) {
             remoteView.setInt(R.id.icon, "setImageResource", R.drawable.icon_white);
-        }else{
+        } else {
             remoteView.setInt(R.id.icon, "setVisibility", View.GONE);
         }
 
         remoteView.setTextColor(R.id.price, Color.parseColor(mFontSelectedColor));
 
-        remoteView.setInt(R.id.background, "setColorFilter", Color.parseColor(mPanelSelectedColor));
+        float newSize = (size - 84) / 6;
+        if (newSize < 20){
+            newSize = 20;
+        }
+        remoteView.setTextViewTextSize(R.id.price, TypedValue.COMPLEX_UNIT_SP, newSize);
+
         remoteView.setInt(R.id.background, "setAlpha", mSharedPreferences.getInt(BACKGROUND_ALPHA, 255));
+        remoteView.setInt(R.id.background, "setColorFilter", Color.parseColor(mPanelSelectedColor));
+
 
         AppWidgetManager.getInstance(this).partiallyUpdateAppWidget(widgetId, remoteView);
 
@@ -122,7 +151,6 @@ public class UpdateWidgetServiceMain extends Service {
 
 
     }
-
 
 
     public void showProgressBar(boolean isShow, int widgetId) {
@@ -142,9 +170,11 @@ public class UpdateWidgetServiceMain extends Service {
 
     private class ChangeWidgetThread extends Thread {
         private int widgetId;
+        private int size;
 
-        ChangeWidgetThread(int widgetId) {
+        ChangeWidgetThread(int widgetId, int size) {
             this.widgetId = widgetId;
+            this.size = size;
         }
 
         @Override
@@ -159,9 +189,10 @@ public class UpdateWidgetServiceMain extends Service {
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject jsonObject = jsonArray.optJSONObject(0);
-
-                            changeWidget(jsonObject.optString("price_usd"), jsonObject.optString("price_btc"), widgetId);
+                            changeWidget(jsonObject.optString("price_usd"), jsonObject.optString("price_btc"), widgetId, size);
                         } catch (Exception e) {
+                            changeWidget("-.-", "-.-", widgetId, size);
+                            UpdateWidgetServiceMain.this.showProgressBar(false, widgetId);
                             e.printStackTrace();
                         }
                     }

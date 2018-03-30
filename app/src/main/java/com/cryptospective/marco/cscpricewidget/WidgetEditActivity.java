@@ -219,7 +219,6 @@ public class WidgetEditActivity extends AppCompatActivity implements Caladbolg.C
         } else {
             mPanelSelectedColor = ColorHelper.checkColor(ColorUtils.colorCode(ColorUtils.argb(rgb, alpha)));
             panelColor.setTextColor(Color.parseColor(mPanelSelectedColor));
-            Log.w("log", "onPickColor: " + mPanelSelectedColor );
             mSharedPreferences.edit().putString(WIDGET_BACKGROUND_COLOR, mPanelSelectedColor).apply();
             mSharedPreferences.edit().putInt(BACKGROUND_ALPHA, alpha).apply();
         }
@@ -234,7 +233,7 @@ public class WidgetEditActivity extends AppCompatActivity implements Caladbolg.C
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("beer", "cKxv2YDfVRgcX9eVQBRtfVwwEEKgofvKjH");
         clipboard.setPrimaryClip(clip);
-        Toast toast = Toast.makeText(this, "Copied", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(),R.string.toast_copied, Toast.LENGTH_LONG);
         View view = toast.getView();
         TextView text = (TextView) view.findViewById(android.R.id.message);
         text.setTextColor(Color.WHITE);
