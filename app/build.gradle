@@ -6,8 +6,8 @@ android {
         applicationId "com.cryptospective.marco.cscpricewidget"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 6
-        versionName '1.4'
+        versionCode 8
+        versionName '1.4.2'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

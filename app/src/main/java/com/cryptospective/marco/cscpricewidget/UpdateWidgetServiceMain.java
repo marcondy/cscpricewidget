@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
@@ -61,7 +63,6 @@ public class UpdateWidgetServiceMain extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        int size = 0;
         if (intent != null) {
             try {
                 widgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_ID);
@@ -73,11 +74,15 @@ public class UpdateWidgetServiceMain extends Service {
         }
 
         if (widgetIds == null) {
-
             ComponentName thisWidget = new ComponentName(this, MobileAssistantWidgetMain.class);
             widgetIds = AppWidgetManager.getInstance(this).getAppWidgetIds(thisWidget);
 
         }
+
+        if (widgetSizes == null) {
+            widgetSizes = new int[widgetIds.length];
+        }
+
         for (int i = 0; i < widgetIds.length; i++) {
             ChangeWidgetThread changeWidgetThread = new ChangeWidgetThread(widgetIds[i], widgetSizes[i]);
             changeWidgetThread.start();
@@ -130,7 +135,7 @@ public class UpdateWidgetServiceMain extends Service {
         remoteView.setTextColor(R.id.price, Color.parseColor(mFontSelectedColor));
 
         float newSize = (size - 84) / 6;
-        if (newSize < 20){
+        if (newSize < 20) {
             newSize = 20;
         }
         remoteView.setTextViewTextSize(R.id.price, TypedValue.COMPLEX_UNIT_SP, newSize);
@@ -182,7 +187,11 @@ public class UpdateWidgetServiceMain extends Service {
             if (widgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
 
                 UpdateWidgetServiceMain.this.showProgressBar(true, widgetId);
-
+                if (!isOnline()) {
+                    changeWidget("-.-", "-.-", widgetId, size);
+                    UpdateWidgetServiceMain.this.showProgressBar(false, widgetId);
+                    return;
+                }
                 Request.getInstance().getRequest("v1/ticker/casinocoin", new Request.IRequestListener() {
                     @Override
                     public void onSuccess(String response) {
@@ -199,11 +208,21 @@ public class UpdateWidgetServiceMain extends Service {
 
                     @Override
                     public void onFail(String message) {
-
+                        changeWidget("-.-", "-.-", widgetId, size);
+                        UpdateWidgetServiceMain.this.showProgressBar(false, widgetId);
                     }
                 });
+
+
             }
 
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }
